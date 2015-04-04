@@ -8,23 +8,23 @@ In it's current form this little program runs from the command line.
 This requires Node.js to run so head over to nodejs.org and hit install if you wish to try this out.
 
 To generate a new character supply information as the following parameters of rollchar.js:
-
+```
   node rollchar.js "Name" "Biography" Gender Race Homeworld Profession "save_to_file.json"
-  
+```  
 To load a saved character use loadchar.js with the file name like this:
-
+```
   node loadchar.js "filename.json"
-
+```
 ## Example:
 
 You type the following into your command line:
-
+```
   node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, migraine prone, kind to animals." Intersex Human Imperial Psyker "my_psyker.json"
-
+```
 A file named 'my_psycker.json' will be created in the './vault' directory. To display the character data again simply run:
-
+```
   node loadchar.js "my_psyker.json"
-
+```
 Note:
 Please use quotations when entering information that includes one or more spaces to the same variable. You can see this in the example, first and last name as well as the biography are within quotation marks.
 For help type:
