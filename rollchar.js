@@ -16,9 +16,10 @@
 //  Initializing variables & required modules
 ///////////////////////////////////////////////////////////////////////////////
 
-generateNewChar = require('./charmodule.js');
-displayChar = require('./displaychar.js');
-saveChar = require('./savechar.js');
+var generateNewChar = require('./charmodule.js');
+var displayChar = require('./displaychar.js');
+var saveChar = require('./savechar.js');
+var loadChar = require('./readcharfromfile.js');
 
 var character = undefined;
 var charVault = [];
@@ -36,34 +37,69 @@ var saveFilePath = process.argv[8]
 //var inv = process.argv[9];
 var skills = {
     Language: "Low Gothic",
-    ForbiddenKnowledge: "The art, knowledge and status of a great tea brewer.",
-    Driving: "Land; Adept at driving simple land vehicles. +5 Modifier."
+    // ForbiddenKnowledge: "The art, knowledge and status of a great tea brewer.",
+    // Driving: "Land; Adept at driving simple land vehicles. +5 Modifier."
 };
 var inv = {
     SlugPistol: {
         Ammo: 0,
-        Damage: 6 + 1
+        // Damage: 6 + 1
     },
-    Lhosticks: 4,
+    // Lhosticks: 4,
     CorpseRations: 5,
-    Charm: "A smooth pebble polished by the abrasive winds of the desert, is tied like a pet on leash with a length of greasy rope. Goes by name of Br. Blockford"
+    //Charm: "A smooth pebble polished by the abrasive winds of the desert, is tied like a pet on leash with a length of greasy rope. Goes by name of Br. Blockford"
 };
 
-
+// Help menu
 if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
-    console.log(' Dark Heresy Character Generator');
+  
+    console.log(' rollchar - A Dark Heresy Character Generator');
     console.log(' To generate a new character supply data in the following format: \n');
-    console.log('   node charmain.js "Name" "Biography" Gender Race Homeworld Profession "save_to_file.json" \n');
-    console.log(' Example:\n node charmain.js "Medb Hedtsky" "Excellent deductionist though close-minded, migraine prone, kind to animals." Intersex Human Imperial Psyker "my_psyker.json"\n'); 
+    console.log('   node rollchar.js "Name" "Biography" Gender Race Homeworld Profession "save_to_file.json" \n');
+    console.log(' Example:\n node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, migraine prone, kind to animals." Intersex Human Imperial Psyker "my_psyker.json"\n'); 
     console.log('  * Please use quotations when entering information that includes one or more spaces to the same variable, such as a first name and last name, as well as the biography in the example.');
+    console.log(' To load a saved character: \n');
+    console.log('   node rollchar.js load "filename.json" ');
+    
     console.log(' To repeat this message use \'/?\' or \'help\'');  
+   
+} else if ( process.argv[2] === 'load' ) {
+// Load character using "node rollchar.js load 'filename'"
+
+    var filePath = './vault/' + process.argv[3];
+
+    if ( filePath.indexOf('.json') === -1 ) {
+        filePath = filePath + '.json';
+    }
+    
+    character = loadChar( filePath, callback);
+
+    function callback(err, charData) {
+        if ( err ) {
+            console.error( err );
+        }
+
+        displayChar(
+            charData,
+            function doneDisplaying(err, charData){
+                if ( err ) {
+                    console.error('There was an error: ', err);
+            }
+        });  
+
+        return charData;
+
+}
+
+
 } else {
+// run rollchar.js with normal character generating arguments & function
     main()
 }
 
 function main() {
     
-  //    Generate a character and store the object in 'character'
+//    Generate a character and store the object in 'character'
 ///////////////////////////////////////////////////////////////////////////////
       
     var character = generateNewChar(
@@ -99,8 +135,8 @@ function main() {
 
 
 
-    //    Add character object to charVault array to store in memory
-    ///////////////////////////////////////////////////////////////////////////////
+    //  Add character object to charVault[] to store in memory
+    ///////////////////////////////////////////////////////////////////////////
     charVault.push(character);
     charVault.push(character);
 
@@ -117,11 +153,11 @@ function main() {
 
     //console.log(charVault);
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     //
-    //    Store Character Object
+    //    Save Character Object To File
     //
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     // callback function for saveChar
     function doneSaving(err, path, savedData) {
@@ -129,11 +165,12 @@ function main() {
             console.error('There was an error saving the file: ', err);
         }
         
-        console.log('Character in charVault slot 0 now saving to file: ' +  path );
+        console.log('Character stored in charVault slot 0 now saving to file: ' +  path );
         
     }
 
-    if ( saveFilePath === undefined ) { // If nothing was passed save it anyway
+    if ( saveFilePath === undefined ) {
+      // If nothing was passed save it anyway
       
         saveFilePath = './vault/' + character.name + '.json';
         

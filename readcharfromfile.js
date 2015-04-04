@@ -9,7 +9,7 @@ var chardata = undefined;
 
 module.exports = function(path, callback) {
   
-    console.log('---------------Loading character:-------------------\n');
+    console.log(' Loading character...');
 
     var fileData = undefined;
     
@@ -30,7 +30,7 @@ module.exports = function(path, callback) {
             chardata = JSON.parse(fileData); 
 
             // log success to stdout with a little debug test
-            console.log('Successfully loaded stats for ' + chardata['name']);
+            console.log(' Successfully loaded stats for ' + chardata['name'] + '.\n');
             //console.log('Biography: ' + chardata['biography']);
             
             return callback(null, chardata);
