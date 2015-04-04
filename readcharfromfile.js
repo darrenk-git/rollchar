@@ -31,7 +31,7 @@ module.exports = function(path, callback) {
 
             // log success to stdout with a little debug test
             console.log('Successfully loaded stats for ' + chardata['name']);
-            console.log('Biography: ' + chardata['biography']);
+            //console.log('Biography: ' + chardata['biography']);
             
             return callback(null, chardata);
         }
