@@ -1,0 +1,31 @@
+{
+    "name": "Testname",
+    "biography": "Testbio",
+    "gender": "Male",
+    "race": "Human",
+    "homeworld": "Voidborn",
+    "characteristics": {
+        "WS": 36,
+        "BS": 22,
+        "S": 24,
+        "T": 34,
+        "Ag": 36,
+        "Int": 37,
+        "Per": 36,
+        "WP": 33,
+        "Fel": 27
+    },
+    "inventory": {
+        "SlugPistol": {
+            "Ammo": 0
+        },
+        "CorpseRations": 5
+    },
+    "skills": {
+        "Language": "Low Gothic"
+    },
+    "subplot": "Subplot",
+    "insanity": 0,
+    "corruption": 0,
+    "profession": "Cleric"
+}
