@@ -11,9 +11,10 @@ To generate a new character supply information as the following parameters of ro
 ```
   node rollchar.js "Name" "Biography" Gender Race Homeworld Profession "save_to_file.json"
 ```  
-To load a saved character use loadchar.js with the file name like this:
+The file is saved in the 'vault' folder.
+To load a saved character use rollchar.js with the load command and a file name like this:
 ```
-  node loadchar.js "filename.json"
+  node rollchar.js load "filename.json"
 ```
 ## Example:
 
@@ -23,7 +24,7 @@ You type the following into your command line:
 ```
 A file named 'my_psycker.json' will be created in the './vault' directory. To display the character data again simply run:
 ```
-  node loadchar.js "my_psyker.json"
+  node rollchar.js load "my_psyker.json"
 ```
 Note:
 Please use quotations when entering information that includes one or more spaces to the same variable. You can see this in the example, first and last name as well as the biography are within quotation marks.
