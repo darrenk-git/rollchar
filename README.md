@@ -28,9 +28,11 @@ A file named 'my_psycker.json' will be created in the './vault' directory. To di
 ```
 Note:
 Please use quotations when entering information that includes one or more spaces to the same variable. You can see this in the example, first and last name as well as the biography are within quotation marks.
-For help type:
-  node rollchar.js help
 
+For help type:
+```
+  node rollchar.js help
+```
 ## License & Terms of use
 
 I created this program as a fan of the Dark Heresy role playing game, for fans of Dark Heresy to use.
