@@ -37,5 +37,5 @@ You are free to use, view and modify this program and it's source code for your 
 If you redistribute this or anything made from this please link back to my github account or website.
 If you wish to use my code for commercial purposes please contact me before doing so. You can e-mail me through github.
 
-Dark Heresy is owned and licensed by Fantasy Flight Games and all respective rights by their respective owners.
-I have no affiliation with Fantasy Flight Games or Games Workshop, however I encourage you to check the game out!
+Dark Heresy is owned and licensed by Fantasy Flight Games and all respective rights reserved by their respective owners.
+I have no affiliation with Fantasy Flight Games or Games Workshop, however I encourage you to check out Dark Heresy for much fun times!
