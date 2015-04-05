@@ -24,7 +24,7 @@ module.exports = function(character, callback) {
                         
                         }
                     }
-                } else if (prop === 'characteristics') {
+                /*}  else if (prop === 'characteristics') {
                                       
                     list.push( '   ' + prop + ": ");
                     for( var prop2 in obj['characteristics'] ) {
@@ -34,11 +34,11 @@ module.exports = function(character, callback) {
                           list.push( '   > ' + prop2 + ": " + obj[prop][prop2] );
                         
                         }
-                    }
+                    } */
                 } else if ( !(prop instanceof Object) ){
 
                     //console.log( prop + ": " + obj[prop]);
-                    list.push( '\t\t\t' + prop + ": " + obj[prop] );
+                    list.push( '\t\t' + prop + ":\t" + obj[prop] );
 
                    
                 }
@@ -62,8 +62,9 @@ module.exports = function(character, callback) {
     
     console.log(' Homeworld: \t' + character.homeworld.capitalize()); */
     console.log(' \t Homeworld: \t' + character.homeworld);
-    console.log(' \t Profession: \t' + character.profession);
+    console.log(' \t Career: \t' + character.career);
     
+    /*
     console.log('\n\t Skills: \n');
     var skillsList = logObjectProps(character.skills);
     console.log(skillsList.join('\n').toString());
@@ -71,8 +72,8 @@ module.exports = function(character, callback) {
     console.log('\n\t Inventory: \n');
     var invList = logObjectProps(character.inventory);
     console.log(invList.join('\n').toString());
-  
-    console.log('\n\t Characteristics: \n');
+    */
+    console.log('\n\t Characteristics \n');
     var statList = logObjectProps(character.characteristics);
     console.log(statList.join('\n').toString());
 

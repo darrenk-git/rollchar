@@ -12,7 +12,7 @@ module.exports = function(
     gender, 
     race, 
     homeworld, 
-    prof, 
+    career, 
     skills, 
     inv, 
     callback
@@ -27,29 +27,6 @@ module.exports = function(
     }
     var d100 = function(x) {
         return Math.floor(Math.random()*100+x+1);
-    }
-
-
-// This is set to the Dark Heresy dice roll rules for selecting a random homeworld
-    function getHomeworld(homeworld) {
-      
-        if (homeworld === "random") {
-            var randomWorld = rollD(100);
-            //console.log(randomWorld);
-            //randomWorld;
-            if (randomWorld <= 20){
-                homeworld = "Feral";
-            }else if(randomWorld >= 21 && randomWorld <= 45){
-                homeworld = "Hive";
-            }else if(randomWorld >= 46 && randomWorld <= 90){
-                homeworld = "Imperial";
-            }else if(randomWorld >= 91 && randomWorld <= 100){
-                homeworld = "Voidborn";
-            }
-        
-        return homeworld;
-
-        }
     }
 
     // initialize new character for testing purposes
@@ -93,15 +70,114 @@ module.exports = function(
     character.gender = gender;
     character.race = race;
     character.homeworld = getHomeworld(homeworld);
-    character.profession = prof;
+    character.career = getCareer(career, character.homeworld);
     character.skills = skills;
     character.inventory = inv;
     
+    // This is set to the Dark Heresy dice roll rules for selecting a random homeworld
+    function getHomeworld(homeworld) {
+      
+        if ( homeworld.toLowerCase() === "random" || homeworld === "r" ) {
+            var randomWorld = rollD(100);
+            //console.log(randomWorld);
+            //randomWorld;
+            if (randomWorld <= 20){
+                homeworld = "Feral";
+            }else if(randomWorld >= 21 && randomWorld <= 45){
+                homeworld = "Hive";
+            }else if(randomWorld >= 46 && randomWorld <= 90){
+                homeworld = "Imperial";
+            }else if(randomWorld >= 91 && randomWorld <= 100){
+                homeworld = "Voidborn";
+            }
+        
+        return homeworld;
+
+        } else {
+        return homeworld; 
+        }
+    }
+
+    // This is to set Character career. Random generation depends on homeworld
+    function getCareer(career, homeworld) {
+      
+        if ( career.toLowerCase() === "random" ) {
+            var rCareer = rollD(100);
+            
+            if ( homeworld === 'Feral' ){
+                if ( rCareer >= 1 && rCareer <= 30 ){ 
+                    career = 'Assassin';
+                } else if (rCareer >= 31 && rCareer <= 80 ){ 
+                    career = 'Guardsman';
+                } else if (rCareer >= 81 && rCareer <= 90 ){ 
+                    career = 'Imperial Psyker';
+                } else if (rCareer >= 91 && rCareer <= 100 ){ 
+                    career = 'Scum';
+                } 
+            } else if ( homeworld === 'Hive' ) {
+                if (rCareer >= 1 && rCareer <= 17 ){ //
+                    career = 'Arbitrator';
+                } else if (rCareer >= 18 && rCareer <= 20 ){ //
+                    career = 'Assassin';
+                } else if (rCareer >= 21 && rCareer <= 25 ){ //
+                    career = 'Cleric';
+                } else if (rCareer >= 26 && rCareer <= 35 ){ //
+                    career = 'Gaurdsman';
+                } else if (rCareer >= 36 && rCareer <= 40 ){ //
+                    career = 'Imperial Psyker';
+                } else if (rCareer >= 41 && rCareer <= 89 ){ //
+                    career = 'Scum';
+                } else if (rCareer >= 90 && rCareer <= 100 ){ //
+                    career = 'Tech-Priest';
+                }
+            } else if ( homeworld === 'Imperial' ) {
+                if (rCareer >= 1 && rCareer <= 12 ){ //
+                    career = 'Adept';
+                } else if (rCareer >= 13 && rCareer <= 25 ){ //
+                    career = 'Arbitrator';
+                } else if (rCareer >= 26 && rCareer <= 38 ){ //
+                    career = 'Assassin';
+                } else if (rCareer >= 39 && rCareer <= 52 ){ //
+                    career = 'Cleric';
+                } else if (rCareer >= 53 && rCareer <= 65 ){ //
+                    career = 'Gaurdsman';
+                } else if (rCareer >= 66 && rCareer <= 79 ){ //
+                    career = 'Imperial Psyker';
+                } else if (rCareer >= 80 && rCareer <= 90 ){ //
+                    career = 'Scum';
+                } else if (rCareer >= 91 && rCareer <= 100 ){ //
+                    career = 'Tech-Priest';
+                }
+            } else if ( homeworld === 'Voidborn' ) {
+                if (rCareer >= 1 && rCareer <= 10 ){ //
+                    career = 'Adept';
+                } else if (rCareer >= 11 && rCareer <= 20 ){ //
+                    career = 'Arbitrator';
+                } else if (rCareer >= 21 && rCareer <= 25 ){ //
+                    career = 'Assassin';
+                } else if (rCareer >= 26 && rCareer <= 35 ){ //
+                    career = 'Cleric';
+                } else if (rCareer >= 36 && rCareer <= 75 ){ //
+                    career = 'Imperial Psyker';
+                } else if (rCareer >= 76 && rCareer <= 85 ){ //
+                    career = 'Scum';
+                } else if (rCareer >= 86 && rCareer <= 100 ){ //
+                    career = 'Tech-Priest';
+                } 
+            }
+        
+            return career; 
+        } else {
+            return career; 
+        }
+      
+    }
     
     function generateStats(character){
         
-        var homeworld = character.homeworld;
-        if (homeworld === "Feral") {
+        var homeworld = character.homeworld.toLowerCase();
+        
+        if (homeworld === "feral") {
             character.characteristics.WS = d20(20);
             character.characteristics.BS = d20(20);
             character.characteristics.S = d20(25);
@@ -111,7 +187,7 @@ module.exports = function(
             character.characteristics.Per = d20(20);
             character.characteristics.WP = d20(15);
             character.characteristics.Fel= d20(15);
-        } else if (homeworld === "Hive") {
+        } else if (homeworld === "hive") {
             character.characteristics.WS = d20(20);
             character.characteristics.BS = d20(20);
             character.characteristics.S = d20(20);
@@ -121,7 +197,7 @@ module.exports = function(
             character.characteristics.Per = d20(20);
             character.characteristics.WP = d20(20);
             character.characteristics.Fel= d20(25);
-        }else if (homeworld === "Imperial") {
+        }else if (homeworld === "imperial") {
             character.characteristics.WS = d20(20);
             character.characteristics.BS = d20(20);
             character.characteristics.S = d20(20);
@@ -131,7 +207,7 @@ module.exports = function(
             character.characteristics.Per = d20(20);
             character.characteristics.WP = d20(20);
             character.characteristics.Fel= d20(20);
-        }else if (homeworld === "Voidborn") {
+        }else if (homeworld === "voidborn") {
             character.characteristics.WS = d20(20);
             character.characteristics.BS = d20(20);
             character.characteristics.S = d20(15);

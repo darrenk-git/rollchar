@@ -24,31 +24,12 @@ var loadChar = require('./readcharfromfile.js');
 var character = undefined;
 var charVault = [];
 
-var name = process.argv[2];
-var bio = process.argv[3];
-var gender =  process.argv[4]; 
-var race = process.argv[5];
-var homeworld = process.argv[6];
-var prof = process.argv[7];
-var saveFilePath = process.argv[8]
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+}
 
 
-//var skills = process.argv[8];
-//var inv = process.argv[9];
-var skills = {
-    Language: "Low Gothic",
-    // ForbiddenKnowledge: "The art, knowledge and status of a great tea brewer.",
-    // Driving: "Land; Adept at driving simple land vehicles. +5 Modifier."
-};
-var inv = {
-    SlugPistol: {
-        Ammo: 0,
-        // Damage: 6 + 1
-    },
-    // Lhosticks: 4,
-    CorpseRations: 5,
-    //Charm: "A smooth pebble polished by the abrasive winds of the desert, is tied like a pet on leash with a length of greasy rope. Goes by name of Br. Blockford"
-};
 
 // Help menu
 if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
@@ -56,8 +37,8 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
     console.log(' rollchar - A Dark Heresy Character Generator');
     console.log(' To generate a new character supply data in the following format: \n');
     console.log('   node rollchar.js "Name" "Biography" Gender Race Homeworld Profession "save_to_file.json" \n');
-    console.log(' Example:\n node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, migraine prone, kind to animals." Intersex Human Imperial Psyker "my_psyker.json"\n'); 
-    console.log('  * Please use quotations when entering information that includes one or more spaces to the same variable, such as a first name and last name, as well as the biography in the example.');
+    console.log(' Example:\n node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, kind to animals." Intersex Human Imperial Psyker "my_psyker.json"\n'); 
+    console.log('  * Please use quotations when entering information that includes one or more spaces.\n');
     console.log(' To load a saved character: \n');
     console.log('   node rollchar.js load "filename.json" ');
     
@@ -92,8 +73,47 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
 }
 
 
+} else if ( process.argv[2] === 'list' ) {
+
+    var fs = require('fs');
+    
+    console.log('\n Listing contents of character vault:\n');
+    
+    fs.readdir('./vault', function (err, list) {
+        list.forEach( function( file ) {
+            console.log('\t' + file);
+        })
+    })
+
 } else {
 // run rollchar.js with normal character generating arguments & function
+
+// user input
+    var name = process.argv[2];
+    var bio = process.argv[3];
+    var gender =  process.argv[4].capitalize(); 
+    var race = process.argv[5].capitalize();
+    var homeworld = process.argv[6].capitalize();
+    var career = process.argv[7].capitalize();
+    var saveFilePath = process.argv[8];
+
+    //var skills = process.argv[8];
+    //var inv = process.argv[9];
+    var skills = {
+        //Language: "Low Gothic",
+        // ForbiddenKnowledge: "The art, knowledge and status of a great tea brewer.",
+        // Driving: "Land; Adept at driving simple land vehicles. +5 Modifier."
+    };
+    var inv = {
+        //SlugPistol: {
+        //    Ammo: 0,
+            // Damage: 6 + 1
+        //},
+        // Lhosticks: 4,
+        //CorpseRations: 5,
+        //Charm: "A smooth pebble polished by the abrasive winds of the desert, is tied like a pet on leash with a length of greasy rope. Goes by name of Br. Blockford"
+    };
+
     main()
 }
 
@@ -108,7 +128,7 @@ function main() {
         gender, 
         race, 
         homeworld, 
-        prof, 
+        career, 
         skills, 
         inv, 
         handleGeneratedChar // trigger callback function
@@ -137,6 +157,8 @@ function main() {
 
     //  Add character object to charVault[] to store in memory
     ///////////////////////////////////////////////////////////////////////////
+    
+    /*
     charVault.push(character);
     charVault.push(character);
 
@@ -152,6 +174,8 @@ function main() {
     charVault.forEach(checkVault);
 
     //console.log(charVault);
+    
+    */
 
     ///////////////////////////////////////////////////////////////////////////
     //
@@ -176,7 +200,7 @@ function main() {
         
         saveChar(
             saveFilePath, 
-            charVault[0], 
+            character, // charVault[0], 
             doneSaving // triggers callback function
         );        
 
@@ -188,7 +212,7 @@ function main() {
     
         saveChar(
             saveFilePath, 
-            charVault[0], 
+            character, //charVault[0], 
             doneSaving // triggers callback function
         );
         
@@ -198,7 +222,7 @@ function main() {
         
         saveChar(
             saveFilePath, 
-            charVault[0], 
+            character, //charVault[0], 
             doneSaving // triggers callback function
         );        
     }

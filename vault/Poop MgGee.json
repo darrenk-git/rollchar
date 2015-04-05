@@ -1,0 +1,24 @@
+{
+    "name": "Poop MgGee",
+    "biography": "POOOP",
+    "gender": "Derp",
+    "race": "Human",
+    "homeworld": "Voidborn",
+    "characteristics": {
+        "WS": 35,
+        "BS": 38,
+        "S": 27,
+        "T": 37,
+        "Ag": 40,
+        "Int": 25,
+        "Per": 29,
+        "WP": 36,
+        "Fel": 37
+    },
+    "inventory": {},
+    "skills": {},
+    "subplot": "Subplot",
+    "insanity": 0,
+    "corruption": 0,
+    "career": "Tech-Priest"
+}
