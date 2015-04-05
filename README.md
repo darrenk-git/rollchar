@@ -16,13 +16,18 @@ To load a saved character use rollchar.js with the load command and a file name 
 ```
   node rollchar.js load "filename.json"
 ```
+To list saved characters type:
+```
+  node rollchar.js list
+```
 ## Example:
 
 You type the following into your command line:
 ```
   node rollchar.js "Medb Hedtsky" "Excellent deductionist,likes animals." Intersex Human Imperial Psyker "my_psyker.json"
 ```
-A file named 'my_psyker.json' will be created in the './vault' directory. To display the character data again simply run:
+A character will be generated and a file named 'my_psyker.json' created with in the './vault' directory.
+To display this character data again type:
 ```
   node rollchar.js load "my_psyker.json"
 ```

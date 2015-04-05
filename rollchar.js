@@ -33,16 +33,19 @@ String.prototype.capitalize = function() {
 
 // Help menu
 if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
-  
-    console.log(' rollchar - A Dark Heresy Character Generator');
-    console.log(' To generate a new character supply data in the following format: \n');
-    console.log('   node rollchar.js "Name" "Biography" Gender Race Homeworld Profession "save_to_file.json" \n');
-    console.log(' Example:\n node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, kind to animals." Intersex Human Imperial Psyker "my_psyker.json"\n'); 
-    console.log('  * Please use quotations when entering information that includes one or more spaces.\n');
-    console.log(' To load a saved character: \n');
-    console.log('   node rollchar.js load "filename.json" ');
+    console.log('--------------------------------------------------------------------------------')
+    console.log(' rollchar - A Dark Heresy Character Generator \n');
+    console.log(' 1. To roll a new character enter data in correct sequence seperated by spaces: \n');
+    console.log('   "Name" "Biography" Gender Race Homeworld Profession "save_file_name.json" \n\n');
+    console.log(' 2. Load and display a saved character: \n');
+    console.log('   node rollchar.js load "filename.json" \n\n');
+    console.log(' 3. List saved characters: \n');
+    console.log('   node rollchar.js list \n');
+    console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, kind to animals." Intersex Human Imperial Psyker "my_psyker.json"\n'); 
+    console.log('  * Please use quotations when entering information that includes any spaces.\n');
     
-    console.log(' To repeat this message use \'/?\' or \'help\'');  
+    console.log(' To repeat this message use \'/?\' or \'help\' \n');
+    console.log('--------------------------------------------------------------------------------')
    
 } else if ( process.argv[2] === 'load' ) {
 // Load character using "node rollchar.js load 'filename'"
@@ -80,9 +83,13 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
     console.log('\n Listing contents of character vault:\n');
     
     fs.readdir('./vault', function (err, list) {
-        list.forEach( function( file ) {
-            console.log('\t' + file);
-        })
+        if (list.length >= 1) {
+            list.forEach( function( file ) {
+                console.log('\t' + file);
+            })
+        } else {
+            console.log('\t Vault is empty');
+        }
     })
 
 } else {
