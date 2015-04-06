@@ -91,7 +91,7 @@ module.exports = function(character, callback) {
     var traitsList = logObjectProps(character.traits);
     console.log(traitsList.join('\n').toString());
     
-    console.log('\n\t Skills: \n');
+    console.log('\n\tSkills: \n');
     var skillsList = logObjectProps(character.skills);
     console.log(skillsList.join('\n').toString());
     
