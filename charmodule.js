@@ -171,7 +171,7 @@ module.exports = function(
                 } else if (rCareer >= 21 && rCareer <= 25 ){ //
                     career = 'Cleric';
                 } else if (rCareer >= 26 && rCareer <= 35 ){ //
-                    career = 'Gaurdsman';
+                    career = 'Guardsman';
                 } else if (rCareer >= 36 && rCareer <= 40 ){ //
                     career = 'Imperial Psyker';
                 } else if (rCareer >= 41 && rCareer <= 89 ){ //
