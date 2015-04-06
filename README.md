@@ -9,7 +9,7 @@ This requires Node.js to run so head over to nodejs.org and hit install if you w
 
 To generate a new character supply information as the following parameters of rollchar.js:
 ```
-  node rollchar.js "Name" "Biography" Gender Race Homeworld Profession "save_to_file.json"
+  node rollchar.js "Name" "Biography" Homeworld Profession "save_file.json"
 ```  
 The file is saved in the 'vault' folder.
 To load a saved character use rollchar.js with the load command and a file name like this:
@@ -24,7 +24,7 @@ To list saved characters type:
 
 You type the following into your command line:
 ```
-  node rollchar.js "Medb Hedtsky" "Excellent deductionist,likes animals." Intersex Human Imperial Psyker "my_psyker.json"
+  node rollchar.js "Medb Hedtsky" "Excellent deductionist,likes animals." Imperial "Imperial Psyker" "my_psyker.json"
 ```
 A character will be generated and a file named 'my_psyker.json' created with in the './vault' directory.
 To display this character data again type:

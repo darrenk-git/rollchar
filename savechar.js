@@ -8,7 +8,7 @@ var path = require('path');
 
 module.exports = function(savePath, dataToSave, callback) {
   
-    console.log('---------------Writing this character:-------------------\n' + dataToSave['name']);
+    console.log('Writing character ' + dataToSave['name'] + '...');
     
 
     
@@ -31,7 +31,7 @@ module.exports = function(savePath, dataToSave, callback) {
                                     if ( err ) {
                                         //console.error( err )
                                     } else {
-                                         console.log('Vault folder has been created.')
+                                         console.log( 'Vault folder has been created.')
                                          //try to save again                                      
                                          fs.writeFile( 
                                             savePath, 
@@ -52,11 +52,9 @@ module.exports = function(savePath, dataToSave, callback) {
                         });
                     }); 
                 }
-                
-            //console.log("Failed to write file:", err); // no longer accurate debug
-            
+                        
             } else {
-                console.log("File written. Character saved successfully!");
+                //console.log("Character saved successfully!");
             }
         });
     return callback(null, savePath, dataToSave);

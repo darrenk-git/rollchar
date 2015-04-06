@@ -35,12 +35,24 @@ module.exports = function(character, callback) {
                         
                         }
                     } */
+                } else if ( obj  === character.traits ) {
+                  
+                    list.push( '\t\t' + prop /*+ ":\n" + obj[prop]*/ );
+                
+                } else if ( obj  === character.talents ) {
+                  
+                    list.push( '\t\t' + prop /*+ ":\n" + obj[prop]*/ );
+                
+                } else if ( obj  === character.skills ) {
+                  
+                    list.push( '\t\t' + prop /*+ ":\n" + obj[prop]*/ );
+                
                 } else if ( !(prop instanceof Object) ){
 
                     //console.log( prop + ": " + obj[prop]);
                     list.push( '\t\t' + prop + ":\t" + obj[prop] );
 
-                   
+                  
                 }
             }
         }
@@ -51,32 +63,42 @@ module.exports = function(character, callback) {
     
     console.log('\n------------------------------- Character Sheet --------------------------------');
     
-    console.log(' \t Name: \t\t' + character.name);
-    console.log(' \t Biography: \t' + character.biography);
-    console.log(' \t Gender: \t' + character.gender);
-    console.log(' \t Race: \t\t' + character.race);
+    console.log('\tName: \t\t' + character.name);
+    console.log('\tBiography: \t' + character.biography);
+    //console.log('\tGender: \t' + character.gender);
+    //console.log('\tRace: \t\t' + character.race);
       
     /* String.prototype.capitalize = function () {
         return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
     }
     
     console.log(' Homeworld: \t' + character.homeworld.capitalize()); */
-    console.log(' \t Homeworld: \t' + character.homeworld);
-    console.log(' \t Career: \t' + character.career);
+    console.log('\tHomeworld: \t' + character.homeworld);
+    console.log('\tCareer: \t' + character.career);
     
     /*
-    console.log('\n\t Skills: \n');
-    var skillsList = logObjectProps(character.skills);
-    console.log(skillsList.join('\n').toString());
     
     console.log('\n\t Inventory: \n');
     var invList = logObjectProps(character.inventory);
     console.log(invList.join('\n').toString());
     */
-    console.log('\n\t Characteristics \n');
+    
+    console.log('\n\tCharacteristics \n');
     var statList = logObjectProps(character.characteristics);
     console.log(statList.join('\n').toString());
-
+    
+    console.log('\n\tTraits \n');
+    var traitsList = logObjectProps(character.traits);
+    console.log(traitsList.join('\n').toString());
+    
+    console.log('\n\t Skills: \n');
+    var skillsList = logObjectProps(character.skills);
+    console.log(skillsList.join('\n').toString());
+    
+    console.log('\n\tTalents \n');
+    var talentsList = logObjectProps(character.talents);
+    console.log(talentsList.join('\n').toString());
+    
     console.log('\n--------------------------------------------------------------------------------');
     
     return callback(null, character);

@@ -36,12 +36,12 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
     console.log('--------------------------------------------------------------------------------')
     console.log(' rollchar - A Dark Heresy Character Generator \n');
     console.log(' 1. To roll a new character enter data in correct sequence seperated by spaces: \n');
-    console.log('   "Name" "Biography" Gender Race Homeworld Profession "save_file_name.json" \n\n');
+    console.log('   "Name" "Biography" Homeworld Profession "save_file_name.json" \n\n');
     console.log(' 2. Load and display a saved character: \n');
     console.log('   node rollchar.js load "filename.json" \n\n');
     console.log(' 3. List saved characters: \n');
     console.log('   node rollchar.js list \n');
-    console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, kind to animals." Intersex Human Imperial Psyker "my_psyker.json"\n'); 
+    console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, kind to animals." Imperial Psyker "my_psyker.json"\n'); 
     console.log('  * Please use quotations when entering information that includes any spaces.\n');
     
     console.log(' To repeat this message use \'/?\' or \'help\' \n');
@@ -50,8 +50,11 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
 } else if ( process.argv[2] === 'load' ) {
 // Load character using "node rollchar.js load 'filename'"
 
-    var filePath = './vault/' + process.argv[3];
-
+    var filePath = process.argv[3];
+    if ( filePath.indexOf('./vault') === -1 ) {
+        filePath = './vault/' + filePath;
+    }
+    
     if ( filePath.indexOf('.json') === -1 ) {
         filePath = filePath + '.json';
     }
@@ -93,16 +96,19 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
     })
 
 } else {
-// run rollchar.js with normal character generating arguments & function
 
+///////////////////////////////////////////////////////////////////////////////  
+// run rollchar.js with normal character generating arguments & function
+///////////////////////////////////////////////////////////////////////////////
 // user input
+///////////////////////////////////////////////////////////////////////////////
     var name = process.argv[2];
     var bio = process.argv[3];
-    var gender =  process.argv[4].capitalize(); 
-    var race = process.argv[5].capitalize();
-    var homeworld = process.argv[6].capitalize();
-    var career = process.argv[7].capitalize();
-    var saveFilePath = process.argv[8];
+    //var gender =  process.argv[4].capitalize(); 
+    //var race = process.argv[5].capitalize();
+    var homeworld = process.argv[4].capitalize();
+    var career = process.argv[5].capitalize();
+    var saveFilePath = process.argv[6];
 
     //var skills = process.argv[8];
     //var inv = process.argv[9];
@@ -132,8 +138,8 @@ function main() {
     var character = generateNewChar(
         name, 
         bio, 
-        gender, 
-        race, 
+        //gender, 
+        //race, 
         homeworld, 
         career, 
         skills, 
@@ -196,7 +202,9 @@ function main() {
             console.error('There was an error saving the file: ', err);
         }
         
-        console.log('Character stored in charVault slot 0 now saving to file: ' +  path );
+        console.log( 'Character saved to file: ' +  path );
+        console.log( 'Access by using: < node rollchar.js load \"' + path + '\' >' );
+        console.log( 'Or use < node rollchar.js list > to list all saved files.' );
         
     }
 
