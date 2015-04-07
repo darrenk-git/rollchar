@@ -9,8 +9,9 @@ This requires Node.js to run so head over to nodejs.org and hit install if you w
 
 To generate a new character supply information as the following parameters of rollchar.js:
 ```
-  node rollchar.js "Name" "Biography" Homeworld Profession "save_file.json"
+  node rollchar.js "Name" "Biography" Homeworld-Type Career "save_file.json"
 ```  
+Homeworld-Type is one of 4 homeworld types specified in the Core Rulebook - Feral, Imperial, Hive or Voidborn. This parameter determines your characters' base characteristics.
 The file is saved in the 'vault' folder.
 To load a saved character use rollchar.js with the load command and a file name like this:
 ```

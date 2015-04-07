@@ -36,12 +36,13 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
     console.log('--------------------------------------------------------------------------------')
     console.log(' rollchar - A Dark Heresy Character Generator \n');
     console.log(' 1. To roll a new character enter data in correct sequence seperated by spaces: \n');
-    console.log('   "Name" "Biography" Homeworld Profession "save_file_name.json" \n\n');
+    console.log('   "Name" "Biography" Homeworld-Type Career "save_file_name.json" \n');
+    console.log(' Homeworld types are: \n\tFeral\n\tImperial\n\tHive\n\tVoidborn\n\n' );
     console.log(' 2. Load and display a saved character: \n');
     console.log('   node rollchar.js load "filename.json" \n\n');
     console.log(' 3. List saved characters: \n');
     console.log('   node rollchar.js list \n');
-    console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" "Excellent deductionist though close-minded, kind to animals." Imperial Psyker "my_psyker.json"\n'); 
+    console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" "Excellent deductionist, kind to animals." Voidborn "Imperial Psyker" "my psyker.json"\n'); 
     console.log('  * Please use quotations when entering information that includes any spaces.\n');
     
     console.log(' To repeat this message use \'/?\' or \'help\' \n');
@@ -203,8 +204,8 @@ function main() {
         }
         
         console.log( 'Character saved to file: ' +  path );
-        console.log( 'Access by using: < node rollchar.js load \"' + path + '\' >' );
-        console.log( 'Or use < node rollchar.js list > to list all saved files.' );
+        console.log( 'Access by using:\n\t< node rollchar.js load \"' + path + '\' >' );
+        console.log( 'Or use\n\t< node rollchar.js list > to list all saved files.' );
         
     }
 
