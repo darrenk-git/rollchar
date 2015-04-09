@@ -1,5 +1,5 @@
 # rollchar
-A simple node.js character generator to quickly roll up a basic Dark Heresy character.
+A fan-made simple node.js character generator to quickly roll up a basic Dark Heresy character.
 Why? I'm a fan of the game and felt I could contribute to those among us who need to roll up a new character but don't have an hour to spare!
 
 ## Usage
@@ -71,7 +71,7 @@ You are free to use, view and modify this program and it's source code for your 
 If you redistribute this or anything made from this please link back to my github account or website.
 If you wish to use my code for commercial purposes please contact me before doing so. You can e-mail me through github.
 
-Dark Heresy is owned and licensed by Fantasy Flight Games and all respective rights reserved by their respective owners.
+Dark Heresy is owned by Fantasy Flight Games, who retain all respective rights to Dark Heresy. All rights reserved by their respective owners.
 I have no affiliation with Fantasy Flight Games or Games Workshop, however I encourage you to check out Dark Heresy for much fun times!
 
 ### Next steps
