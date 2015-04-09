@@ -64,7 +64,7 @@ module.exports = function(character, callback) {
     console.log('\n------------------------------- Character Sheet --------------------------------');
     
     console.log('\tName: \t\t' + character.name);
-    console.log('\tBiography: \t' + character.biography);
+    //console.log('\tBiography: \t' + character.biography);
     //console.log('\tGender: \t' + character.gender);
     //console.log('\tRace: \t\t' + character.race);
       

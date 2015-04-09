@@ -32,24 +32,39 @@ String.prototype.capitalize = function() {
 
 
 // Help menu
-if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
+if ( process.argv[2] === '-h' || process.argv[2] === '--help' || process.argv[2] === '/?' ) {
     console.log('--------------------------------------------------------------------------------')
     console.log(' rollchar - A Dark Heresy Character Generator \n');
     console.log(' 1. To roll a new character enter data in correct sequence seperated by spaces: \n');
     console.log('   "Name" "Biography" Homeworld-Type Career "save_file_name.json" \n');
-    console.log(' Homeworld types are: \n\tFeral\n\tImperial\n\tHive\n\tVoidborn\n\n' );
+    console.log(' Homeworld types are:');
+    console.log('\t' + 'Feral');
+    console.log('\t' + 'Imperial');
+    console.log('\t' + 'Hive');
+    console.log('\t' + 'Voidborn');
+    console.log('\t' + 'random' );
+    console.log(' Career types are:');
+    console.log('\t' + 'Adept');
+    console.log('\t' + 'Arbitrator');
+    console.log('\t' + 'Assassin');
+    console.log('\t' + 'Cleric');
+    console.log('\t' + 'Guardsman');
+    console.log('\t' + 'Imperial Psyker');
+    console.log('\t' + 'Scum');
+    console.log('\t' + 'Tech-Priest' + '\n');
+    console.log('\t' + 'random' + '\n');
     console.log(' 2. Load and display a saved character: \n');
-    console.log('   node rollchar.js load "filename.json" \n\n');
+    console.log('   node rollchar.js --load "filename.json" \n\n');
     console.log(' 3. List saved characters: \n');
-    console.log('   node rollchar.js list \n');
-    console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" "Excellent deductionist, kind to animals." Voidborn "Imperial Psyker" "my psyker.json"\n'); 
+    console.log('   node rollchar.js --list \n');
+    console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" Voidborn "Imperial Psyker" "my psyker.json"\n'); 
     console.log('  * Please use quotations when entering information that includes any spaces.\n');
     
-    console.log(' To repeat this message use \'/?\' or \'help\' \n');
+    console.log(' To repeat this message use \'/?\', \'-h\' or \'--help\' \n');
     console.log('--------------------------------------------------------------------------------')
-   
-} else if ( process.argv[2] === 'load' ) {
-// Load character using "node rollchar.js load 'filename'"
+
+// Load character using "node rollchar.js --load 'filename'"    
+} else if ( process.argv[2] === '--load' || process.argv[2] === '-l') {
 
     var filePath = process.argv[3];
     if ( filePath.indexOf('./vault') === -1 ) {
@@ -60,9 +75,9 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
         filePath = filePath + '.json';
     }
     
-    character = loadChar( filePath, callback);
+    character = loadChar( filePath, displayOnLoad);
 
-    function callback(err, charData) {
+    function displayOnLoad(err, charData) {
         if ( err ) {
             console.error( err );
         }
@@ -80,8 +95,8 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
 }
 
 
-} else if ( process.argv[2] === 'list' ) {
-
+} else if (  process.argv[2] === '-ls' || process.argv[2] === '--list' ) {
+// list characters in character vault
     var fs = require('fs');
     
     console.log('\n Listing contents of character vault:\n');
@@ -96,6 +111,35 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
         }
     })
 
+} else if ( process.argv[2] === undefined && process.argv.length <= 2 ) {
+  
+///////////////////////////////////////////////////////////////////////////////  
+// run rollchar.js with random parameters 
+///////////////////////////////////////////////////////////////////////////////
+// user input
+///////////////////////////////////////////////////////////////////////////////
+    var name = 'random'; //random name
+    var homeworld = 'random'; // random homeworld
+    var career = 'random' // random career
+    var saveFilePath = undefined;
+    //var bio = process.argv[6];
+
+    //var skills = process.argv[8];
+    //var inv = process.argv[9];
+    //var skills = {}
+    //var inv = {
+        //SlugPistol: {
+        //    Ammo: 0,
+        //    Damage: rollD(10)+2
+        //},
+        // Lhosticks: 4,
+        //CorpseRations: 5,
+        //Charm: "A smooth pebble polished by the abrasive winds of the desert, is tied like a pet on leash with a length of greasy rope. Goes by name of Br. Blockford"
+    //};
+
+    main()
+  
+
 } else {
 
 ///////////////////////////////////////////////////////////////////////////////  
@@ -104,29 +148,25 @@ if ( process.argv[2] === 'help' || process.argv[2] === '/?' ) {
 // user input
 ///////////////////////////////////////////////////////////////////////////////
     var name = process.argv[2];
-    var bio = process.argv[3];
     //var gender =  process.argv[4].capitalize(); 
     //var race = process.argv[5].capitalize();
-    var homeworld = process.argv[4].capitalize();
-    var career = process.argv[5].capitalize();
-    var saveFilePath = process.argv[6];
+    var homeworld = process.argv[3].capitalize();
+    var career = process.argv[4].capitalize();
+    var saveFilePath = process.argv[5];
+    //var bio = process.argv[6];
 
     //var skills = process.argv[8];
     //var inv = process.argv[9];
-    var skills = {
-        //Language: "Low Gothic",
-        // ForbiddenKnowledge: "The art, knowledge and status of a great tea brewer.",
-        // Driving: "Land; Adept at driving simple land vehicles. +5 Modifier."
-    };
-    var inv = {
+    //var skills = {}
+    //var inv = {
         //SlugPistol: {
         //    Ammo: 0,
-            // Damage: 6 + 1
+        //    Damage: rollD(10)+2
         //},
         // Lhosticks: 4,
         //CorpseRations: 5,
         //Charm: "A smooth pebble polished by the abrasive winds of the desert, is tied like a pet on leash with a length of greasy rope. Goes by name of Br. Blockford"
-    };
+    //};
 
     main()
 }
@@ -138,13 +178,13 @@ function main() {
       
     var character = generateNewChar(
         name, 
-        bio, 
         //gender, 
         //race, 
         homeworld, 
         career, 
-        skills, 
-        inv, 
+        //skills, 
+        //inv, 
+        //bio, 
         handleGeneratedChar // trigger callback function
     );
 
@@ -164,33 +204,11 @@ function main() {
             } 
         });
         
+        saveCharNow( character );
+        
         return character;
     }
-
-
-
-    //  Add character object to charVault[] to store in memory
-    ///////////////////////////////////////////////////////////////////////////
-    
-    /*
-    charVault.push(character);
-    charVault.push(character);
-
-    function checkVault(slot){
-        for ( slot in charVault ) {
-            if ( slot instanceof Object ) {
-                console.log('Slot '+ charVault.indexOf( slot ) + ' of charVault: ' + 
-                character['name'] + ', a ' + character.race + ' of ' +  
-                character.homeworld + ' lineage.' );
-            }
-        }
-    }
-    charVault.forEach(checkVault);
-
-    //console.log(charVault);
-    
-    */
-
+  
     ///////////////////////////////////////////////////////////////////////////
     //
     //    Save Character Object To File
@@ -204,42 +222,61 @@ function main() {
         }
         
         console.log( 'Character saved to file: ' +  path );
-        console.log( 'Access by using:\n\t< node rollchar.js load \"' + path + '\' >' );
+        console.log( 'Access by using:\n\t< node rollchar.js load \"' + path + '\" >' );
         console.log( 'Or use\n\t< node rollchar.js list > to list all saved files.' );
         
     }
-
-    if ( saveFilePath === undefined ) {
-      // If nothing was passed save it anyway
-      
-        saveFilePath = './vault/' + character.name + '.json';
-        
-        saveChar(
-            saveFilePath, 
-            character, // charVault[0], 
-            doneSaving // triggers callback function
-        );        
-
-    } else if ( saveFilePath.indexOf('.json') !== -1 ) {  // false if no match
-    // If user supplied a file path with '.json' in it, saves to user specified
     
+    function saveCharNow(character) {
+        if ( saveFilePath === undefined && name === 'random' ) {
+        // random name & no save file name, generate name.
+            character.name = character.homeworld + ' '
+                       + character.career + ' '
+                       + character.name; 
+                       // character.name is a random number, see charmodule.js
         
-        saveFilePath = './vault/' + saveFilePath;
-    
-        saveChar(
-            saveFilePath, 
-            character, //charVault[0], 
-            doneSaving // triggers callback function
-        );
+            saveFilePath = './vault/' + character.name + '.json';
+            
+            saveChar(
+                saveFilePath, 
+                character, 
+                doneSaving // triggers callback function
+            );   
         
-    } else { // if no '.json' is found in the user specified file path, add it
-        // this assumes that they have only entered a file name
-        saveFilePath = './vault/' + saveFilePath + '.json';
+        } else if ( saveFilePath === undefined ) {
+          // If nothing was passed save it anyway
+          
+            saveFilePath = './vault/' + character.name + '.json';
+            
+            saveChar(
+                saveFilePath, 
+                character, 
+                doneSaving // triggers callback function
+            );        
+
+        } else if ( saveFilePath.indexOf('.json') !== -1 ) {  // false if no match
+        // If user supplied a file path with '.json' in it, saves to user specified
         
-        saveChar(
-            saveFilePath, 
-            character, //charVault[0], 
-            doneSaving // triggers callback function
-        );        
+            
+            saveFilePath = './vault/' + saveFilePath;
+        
+            saveChar(
+                saveFilePath, 
+                character,
+                doneSaving // triggers callback function
+            );
+            
+        } else { // if no '.json' is found in the user specified file path, add it
+            // this assumes that they have only entered a file name
+            saveFilePath = './vault/' + saveFilePath + '.json';
+            
+            saveChar(
+                saveFilePath, 
+                character, 
+                doneSaving // triggers callback function
+            );        
+        }
     }
+    
+    
 }

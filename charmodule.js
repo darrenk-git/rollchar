@@ -2,19 +2,19 @@
 /* 
 A. 
   1. Generate new character object from following arguments;
-      Name, Bio, Gender, Race, Homeworld, Profession, Skills, Inventory
+      Name, Homeworld-Type, Career
   2. Return Character Object().
 */
 
 module.exports = function(
     name, 
-    bio, 
     //gender, 
     //race, 
     homeworld, 
     career, 
-    skills, 
-    inv, 
+    //skills, 
+    //inv, 
+    //bio, 
     callback
 ){
    
@@ -70,9 +70,11 @@ module.exports = function(
      
     var traits = {};
     var talents = {};
+    var skills = {};
+    var inv = {};
     
-    character.name = name;
-    character.biography = bio;
+    character.name = getName(name);
+    //character.biography = bio;
     //character.gender = gender;
     //character.race = race;
     character.homeworld = getHomeworld(homeworld);
@@ -82,6 +84,18 @@ module.exports = function(
     character.talents = getTalents(talents, character.career);
     character.inventory = inv;
     character.characteristics = generateStats(character);
+    
+    function getName(name) {
+        if ( name === 'random' ) {
+            //generate random name
+            name = rollD(1000)
+                          .toString()
+                          .capitalize();
+            return name;
+        } else {
+            return name;
+        }
+    }
     
     // This is set to the Dark Heresy dice roll rules for selecting a random homeworld
     function getHomeworld(homeworld) {
