@@ -62,7 +62,7 @@ Please use quotations when entering information that includes one or more spaces
 
 For help type:
 ```
-  node rollchar.js help
+  node rollchar.js --help
 ```
 ### License & Terms of use
 
