@@ -1,6 +1,6 @@
 # rollchar
-A fan-made simple node.js character generator to quickly roll up a basic Dark Heresy character.
-Why? I'm a fan of the game and felt I could contribute to those among us who need to roll up a new character but don't have an hour to spare!
+A fan-made node.js character generator to quickly roll up a basic Dark Heresy character.
+Why? I've enjoyed playing the game and this project exists to teach myself programming. I also felt like contributing to those among us who need to roll up a new character but don't have an hour to spare!
 
 ## Usage
 
