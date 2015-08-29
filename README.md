@@ -18,9 +18,11 @@ To generate a new random character simply run the following without any options.
 | Options | Description |
 | ------------- | ------------- |
 | ["Name"] ["Homeworld-Type"] ["Career"]  | This passes your character name, homeworld type and career options to the generator.|
-| -h, --help or /?   | Displays the help menu.  |
+| -h, --help, help or /?   | Displays the help menu.  |
 | -ls, --list  | Displays a list of characters from the vault directory. |
 | -l, --load [ filename ] | Loads and displays the given file name.  |
+| --help homeworld | Displays the valid homeworld types.  |
+| --help career | Displays the valid career types.  |
 
 Rollchar.js uses a space to seperate each option. Please insert quotations around values that contain spaces, e.g. the career "Imperial Psyker". 
 

@@ -32,36 +32,63 @@ String.prototype.capitalize = function() {
 
 
 // Help menu
-if ( process.argv[2] === '-h' || process.argv[2] === '--help' || process.argv[2] === '/?' ) {
-    console.log('--------------------------------------------------------------------------------')
+if ( process.argv[2] === '-h' || process.argv[2] === '--help' || process.argv[2] === '/?' || process.argv[2] === 'help') {
+    console.log('--------------------------------------------------------------------------------');
     console.log(' rollchar - A Dark Heresy Character Generator \n');
-    console.log(' 1. To roll a new character enter data in correct sequence seperated by spaces: \n');
-    console.log('   "Name" "Biography" Homeworld-Type Career "save_file_name.json" \n');
-    console.log(' Homeworld types are:');
-    console.log('\t' + 'Feral');
-    console.log('\t' + 'Imperial');
-    console.log('\t' + 'Hive');
-    console.log('\t' + 'Voidborn');
-    console.log('\t' + 'random' );
-    console.log(' Career types are:');
-    console.log('\t' + 'Adept');
-    console.log('\t' + 'Arbitrator');
-    console.log('\t' + 'Assassin');
-    console.log('\t' + 'Cleric');
-    console.log('\t' + 'Guardsman');
-    console.log('\t' + 'Imperial Psyker');
-    console.log('\t' + 'Scum');
-    console.log('\t' + 'Tech-Priest' + '\n');
-    console.log('\t' + 'random' + '\n');
-    console.log(' 2. Load and display a saved character: \n');
-    console.log('   node rollchar.js --load "filename.json" \n\n');
-    console.log(' 3. List saved characters: \n');
-    console.log('   node rollchar.js --list \n');
-    console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" Voidborn "Imperial Psyker" "my psyker.json"\n'); 
-    console.log('  * Please use quotations when entering information that includes any spaces.\n');
     
-    console.log(' To repeat this message use \'/?\', \'-h\' or \'--help\' \n');
-    console.log('--------------------------------------------------------------------------------')
+    //Nested Help
+    if( process.argv[3] === 'homeworld') {
+    // Display valid homeworld arguments
+        console.log(' Homeworld types are: \n');
+        console.log('\t' + 'Feral');
+        console.log('\t' + 'Imperial');
+        console.log('\t' + 'Hive');
+        console.log('\t' + 'Voidborn', '\n');
+        console.log('\t' + 'random' );
+
+    } else if( process.argv[3] === 'career') {
+    // Display valid career arguments
+        console.log(' Career types are: \n');
+        console.log('\t' + 'Adept');
+        console.log('\t' + 'Arbitrator');
+        console.log('\t' + 'Assassin');
+        console.log('\t' + 'Cleric');
+        console.log('\t' + 'Guardsman');
+        console.log('\t' + 'Imperial Psyker');
+        console.log('\t' + 'Scum');
+        console.log('\t' + 'Tech-Priest' + '\n');
+        console.log('\t' + 'random' + '\n');
+    } else {
+    // Display main help menu
+        console.log(' 1. To roll a new character enter data in correct sequence seperated by spaces: \n');
+        console.log('   "Name" <Homeworld-type> <Career> "save_file_name.json" \n');
+        console.log(' Homeworld types are:');
+        console.log('\t' + 'Feral');
+        console.log('\t' + 'Imperial');
+        console.log('\t' + 'Hive');
+        console.log('\t' + 'Voidborn');
+        console.log('\t' + 'random' );
+        console.log(' Career types are:');
+        console.log('\t' + 'Adept');
+        console.log('\t' + 'Arbitrator');
+        console.log('\t' + 'Assassin');
+        console.log('\t' + 'Cleric');
+        console.log('\t' + 'Guardsman');
+        console.log('\t' + 'Imperial Psyker');
+        console.log('\t' + 'Scum');
+        console.log('\t' + 'Tech-Priest' + '\n');
+        console.log('\t' + 'random' + '\n');
+        console.log(' 2. Load and display a saved character: \n');
+        console.log('   node rollchar.js --load "filename.json" \n\n');
+        console.log(' 3. List saved characters: \n');
+        console.log('   node rollchar.js --list \n');
+        console.log('\n Use example:\n\n node rollchar.js "Medb Hedtsky" Voidborn "Imperial Psyker" "my psyker.json"\n'); 
+        console.log('  * Please use quotations when entering information that includes any spaces.\n');
+    }
+    console.log('\n For help menu use \'/?\', \'-h\', \'--help\' or \'help\' \n');
+    console.log('Use help <topic> for information on a topic. e.g. "help homeworld".\n');
+    console.log('--------------------------------------------------------------------------------');
+
 
 // Load character using "node rollchar.js --load 'filename'"    
 } else if ( process.argv[2] === '--load' || process.argv[2] === '-l') {
@@ -92,7 +119,7 @@ if ( process.argv[2] === '-h' || process.argv[2] === '--help' || process.argv[2]
 
         return charData;
 
-}
+    }
 
 
 } else if (  process.argv[2] === '-ls' || process.argv[2] === '--list' ) {
@@ -122,24 +149,9 @@ if ( process.argv[2] === '-h' || process.argv[2] === '--help' || process.argv[2]
     var homeworld = 'random'; // random homeworld
     var career = 'random' // random career
     var saveFilePath = undefined;
-    //var bio = process.argv[6];
-
-    //var skills = process.argv[8];
-    //var inv = process.argv[9];
-    //var skills = {}
-    //var inv = {
-        //SlugPistol: {
-        //    Ammo: 0,
-        //    Damage: rollD(10)+2
-        //},
-        // Lhosticks: 4,
-        //CorpseRations: 5,
-        //Charm: "A smooth pebble polished by the abrasive winds of the desert, is tied like a pet on leash with a length of greasy rope. Goes by name of Br. Blockford"
-    //};
 
     main()
   
-
 } else {
 
 ///////////////////////////////////////////////////////////////////////////////  
@@ -148,25 +160,14 @@ if ( process.argv[2] === '-h' || process.argv[2] === '--help' || process.argv[2]
 // user input
 ///////////////////////////////////////////////////////////////////////////////
     var name = process.argv[2];
-    //var gender =  process.argv[4].capitalize(); 
-    //var race = process.argv[5].capitalize();
     var homeworld = process.argv[3].capitalize();
     var career = process.argv[4].capitalize();
     var saveFilePath = process.argv[5];
-    //var bio = process.argv[6];
-
-    //var skills = process.argv[8];
-    //var inv = process.argv[9];
-    //var skills = {}
-    //var inv = {
-        //SlugPistol: {
-        //    Ammo: 0,
-        //    Damage: rollD(10)+2
-        //},
-        // Lhosticks: 4,
-        //CorpseRations: 5,
-        //Charm: "A smooth pebble polished by the abrasive winds of the desert, is tied like a pet on leash with a length of greasy rope. Goes by name of Br. Blockford"
-    //};
+    if ( process.argv[2] === '-ar') {
+        var arflag = true;
+    } else {
+        var arflag = false;
+    }
 
     main()
 }
@@ -178,13 +179,9 @@ function main() {
       
     var character = generateNewChar(
         name, 
-        //gender, 
-        //race, 
         homeworld, 
-        career, 
-        //skills, 
-        //inv, 
-        //bio, 
+        career,
+        arflag,
         handleGeneratedChar // trigger callback function
     );
 
@@ -277,6 +274,4 @@ function main() {
             );        
         }
     }
-    
-    
 }
