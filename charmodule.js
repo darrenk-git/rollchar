@@ -274,46 +274,12 @@ module.exports = function(
             skills[ 'Speak Language (Low Gothic) (Int)' ] = '';
             skills[ 'Literacy (Int)' ] = '';
             
-            //if ( arflag === true ) {
-                var rSkill = rollD(10);
-                if ( rSkill >= 1 && rSkill <= 5 ) {
-                    skills[ 'Trade (Copyist) (Int)' ] = '';
-                } else if( rSkill >= 6 && rSkill <= 10 ) {
-                    skills[ 'Trade (Valet) (Fel)' ] = '';
-                }
-           /*} else if (arflag !== true ) {
-                console.log('Choose a skill: \n [1] Trade (Copyist) (Int)\n [2] Trade (Valet) (Fel)');
-
-
-                process.stdin.resume();
-                process.stdin.setEncoding('utf8');
-                process.stdin.on('data', function (skillChoice) {
-                    if (skillChoice === '1\n') {
-                        skills[ 'Trade (Copyist) (Int)' ] = '';
-                        process.stdin.pause()
-                    } else if( skillChoice === '2\n' ) {
-                        skills[ 'Trade (Valet) (Fel)' ] = '';
-                        process.stdin.pause()
-                    } else if ( skillChoice === '\n' ){
-                        var rSkill = rollD(10);
-                        if ( rSkill >= 1 && rSkill <= 5 ) {
-                            skills[ 'Trade (Copyist) (Int)' ] = '';
-                        } else if( rSkill >= 6 && rSkill <= 10 ) {
-                            skills[ 'Trade (Valet) (Fel)' ] = '';
-                        }
-                        process.stdin.pause()
-                    }
-                });
-
-
-                var skillChoice = input('Enter number #: ');
-                if ( skillChoice === 1 ) {
-
-                } else if( skillChoice === 2 ) {
-                    skills[ 'Trade (Valet) (Fel)' ] = '';
-                }
-            }*/
-
+            var rSkill = rollD(10);
+            if ( rSkill >= 1 && rSkill <= 5 ) {
+                skills[ 'Trade (Copyist) (Int)' ] = '';
+            } else if( rSkill >= 6 && rSkill <= 10 ) {
+                skills[ 'Trade (Valet) (Fel)' ] = '';
+            }
 
             skills[ 'Common Lore (Imperium) (Int)' ] = '';
             
@@ -607,9 +573,6 @@ module.exports = function(
         
         return character.characteristics;
     }
-    
-    //generateStats(character);
-    
         
     return callback(null, character);
 
